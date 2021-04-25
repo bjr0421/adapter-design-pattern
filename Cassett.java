@@ -1,9 +1,22 @@
+/**
+ * Cassett, a type of AnalogAlbum
+ * @author Brooks Robinson
+ */
+
 import java.util.ArrayList;
 
 public class Cassett implements AnalogAlbum {
     private ArrayList<String> songs = new ArrayList<String>();
     private int currentIndex;
 
+    /**
+     * Constructor for the Cassett object
+     * @param song1 first song
+     * @param song2 second song
+     * @param song3 third song
+     * @param song4 fourth song
+     * @param song5 fifth song
+     */
     public Cassett(String song1,
                    String song2,
                    String song3,
@@ -17,16 +30,22 @@ public class Cassett implements AnalogAlbum {
         currentIndex = 0;
     }
 
+    /**
+     * Plays the cassette
+     * @return the song currently playing
+     */
     @Override
     public String play() {
         if (currentIndex >= 5)
             return "At the end of the cassette you need to rewind";
-        String res = "Playing song " + (currentIndex+1) + ": " + songs.get(currentIndex);
         currentIndex++;
-        //return "Playing song " + currentIndex+1 + ": " + songs.get(currentIndex);
-        return res;
+        return "Playing song " + (currentIndex) + ": " + songs.get(currentIndex-1);
     }
 
+    /**
+     * Rewinds the cassette
+     * @return the song that the cassette has been rewound to
+     */
     @Override
     public String rewind() {
         if (currentIndex == 0)
@@ -35,6 +54,10 @@ public class Cassett implements AnalogAlbum {
         return "Rewinding to song " + (currentIndex+1);
     }
 
+    /**
+     * Fast-forwards the cassette
+     * @return the song that is being fast-forwarded to
+     */
     @Override
     public String ffwd() {
         if (currentIndex >= 4)
@@ -43,11 +66,19 @@ public class Cassett implements AnalogAlbum {
         return "Forwarding to song " + (currentIndex+1);
     }
 
+    /**
+     * Pauses the cassette
+     * @return a message indicating that the cassette has been paused
+     */
     @Override
     public String pause() {
         return "Pausing...";
     }
 
+    /**
+     * Stops and ejects the cassette
+     * @return a message indicating that the cassette has been stopped and ejected
+     */
     @Override
     public String stopEject() {
         return "Stopping cassette and ejecting";
