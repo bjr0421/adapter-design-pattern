@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class CD implements DigitalAlbum {
-    private ArrayList<String> songs;
+    private ArrayList<String> songs = new ArrayList<String>();
     private int currentIndex;
 
     public CD(String song1,
@@ -19,7 +19,7 @@ public class CD implements DigitalAlbum {
 
     @Override
     public String playFromBeginning() {
-        currentIndex = 1;
+        currentIndex = 0;
         return "Playing song 1: " + songs.get(currentIndex);
     }
 
@@ -38,17 +38,24 @@ public class CD implements DigitalAlbum {
             currentIndex--;
             return "Skipping back and playing " + songs.get(currentIndex);
         }
+        currentIndex = 0;
         return "Skipping back and playing " + songs.get(currentIndex); 
     }
 
     @Override
     public String nextSong() {
-        if (currentIndex + 1 < 4) {
-            currentIndex++;
-            return "Playing: " + songs.get(currentIndex);
+        String ret = "";
+        if (currentIndex+1 <= 5) {
+            //currentIndex++;
+            ret = "Playing: " + (currentIndex+1) + ": " + songs.get(currentIndex);
+        } else {
+            currentIndex = 0;
+            return "Playing: " + currentIndex + ": " + songs.get(currentIndex);
         }
-        currentIndex = 0;
-        return "Playing: " + songs.get(currentIndex);
+        currentIndex++;
+        //currentIndex = 0;
+        //ret = "Playing: " + currentIndex + ": " + songs.get(currentIndex);
+        return ret;
     }
 
     @Override
